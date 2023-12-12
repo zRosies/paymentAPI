@@ -7,6 +7,9 @@
     "test": "test",
     "start": "nodemon server.js"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "author": "gustavo",
   "license": "ISC",
   "dependencies": {
