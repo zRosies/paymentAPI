@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const user = require("../controllers/user.js");
 
-router.post("/", user.createPurchase);
-router.get("/", user.getUsers);
-router.get("/:id", user.getPurchaseById);
+router.post("/purchase", user.createPurchase);
+router.get("/users", user.getUsers);
+router.get("/users/:id", user.getPurchaseById);
+router.delete("/delete/:id", user.deletePurchaseById);
 
 module.exports = router;
