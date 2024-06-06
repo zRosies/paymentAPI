@@ -2,10 +2,10 @@
   "name": "car-api",
   "version": "1.0.0",
   "description": "cars api",
-  "main": "app.js",
+  "main": "app/app.js",
   "scripts": {
     "test": "test",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app/app.js"
   },
   "engines": {
     "node": ">=18"

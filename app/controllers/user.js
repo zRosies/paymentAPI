@@ -1,9 +1,9 @@
 const mongodb = require("../connection/db");
-// const {EmailTemplate} = require("./confirmationMessage");
 const { Resend } = require("resend");
 const { ObjectId } = require("mongodb");
-
-// Demonstrating throwing and handling exceptions using try/catch blocks.
+const html = require("../../");
+const sendEmailMessage = require("./sendEmail");
+// import EmailTemplate from "./emailMessage.jsx";
 
 const deletePurchaseById = async (req, res) => {
   try {
@@ -52,42 +52,19 @@ const createPurchase = async (req, res) => {
 
     // Checking if the insertion in the db was successful
     if (result && result.insertedId) {
-      const resend = new Resend(process.env.RESEND_APIKEY);
-
       // Sending an email to the owner confirming the purchase.
-      const { data, error } = await resend.emails.send({
-        from: `${process.env.RESEND_API_DOMAIN}`,
-        to: `${process.env.MY_EMAIL}`,
-        subject: "Purchase confirmation",
-        text: "Purchase confirmed successfully",
-        // react:
-        // html: `<strong>Purchase Confirmed Successfuly!</strong>
-        //       <p  style={{ background: "#eb4034" }}>------------------------------------------------</p>
-        //       <p>Model: ${req.body.paymentInfo.carsName}</p>
-        //       <p>Price: ${req.body.paymentInfo.price}</p>
-        //       <p>Quantity: ${req.body.paymentInfo.quantity}</p>
-        //       <p>Delivery: ${req.body.paymentInfo.fee}</p>
-        //       <p>Fee:${req.body.paymentInfo.fee} </p>
-        //       <p>Payment Method: ${req.body.paymentInfo.method} </p>
-        //       <p>------------------------------------------------</p>
-        //       <h1>Customer Information</h1>
-        //       <p>Name: ${req.body.client.name}</p>
-        //       <p>Phone: ${req.body.client.phone}</p>
-        //       <p>Email: ${req.body.client.email}</p>
-        //       <p>Address: ${req.body.client.addres}</p>
-        //  `,
-      });
+      const sendEmail = await sendEmailMessage(req, result.insertedId);
 
-      if (error) {
-        res.status(500).json({ message: "Internal server error" });
+      if (sendEmail.error) {
+        res.status(422).json({
+          error: sendEmail.error,
+          message: "Re-check your email format",
+        });
       }
-      res
-        .status(201)
-        .json({ message: `${result.insertedId} added to the database` });
-    } else {
-      res
-        .status(400)
-        .json({ message: "No data found or error during insertion" });
+      res.status(201).json({
+        message: `${result.insertedId} added to the database`,
+        purchaseInfo: "Email confirmation sent!",
+      });
     }
   } catch (error) {
     console.log("Error querying the database:", error);

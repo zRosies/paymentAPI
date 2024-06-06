@@ -10,15 +10,17 @@ Node.js
 Javascript
 Express
 Git
-
-{Describe the programming language that you used and any libraries.}
+Yup
+Resend
+Swagger
 
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
 
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [Resend Library](https://resend.com/docs/introduction)
+- [Yup Library](https://www.jsdocs.io/package/yup)
+- [Swagger](https://swagger.io/docs/)
 
 # Future Work
 
