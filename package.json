@@ -4,7 +4,7 @@
   "description": "cars api",
   "main": "src/app.js",
   "scripts": {
-    "test": "test",
+    "test": "npx cypress open",
     "dev": "nodemon src/app.js",
     "swagger": "node src/utils/swaggerAutogen.js"
   },

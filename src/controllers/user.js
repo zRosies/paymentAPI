@@ -18,6 +18,9 @@ const deletePurchaseById = async (req, res) => {
     }
   } catch (error) {
     console.log("Error querying the database:", error);
+    res
+      .status(500)
+      .json({ message: `Error querying the database: ${error.message}` });
   }
 };
 
@@ -90,6 +93,8 @@ const getUsers = async (req, res) => {
 // Get the purchase information from the database
 const getPurchaseById = async (req, res) => {
   const userId = new ObjectId(req.params.id);
+
+  console.log(userId);
   // console.log(userId);
   const result = await mongodb
     .getDb()
@@ -105,8 +110,8 @@ const getPurchaseById = async (req, res) => {
       res.status(200).json(result);
     }
   } catch (error) {
-    console.error("Error querying the database:", error);
     res.status(500).json({ message: "Internal server error" });
+    console.error("Error querying the database:", error);
   }
 };
 
