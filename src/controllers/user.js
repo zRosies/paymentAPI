@@ -1,9 +1,7 @@
 const mongodb = require("../connection/db");
-const { Resend } = require("resend");
 const { ObjectId } = require("mongodb");
 const html = require("../../");
 const sendEmailMessage = require("./sendEmail");
-// import EmailTemplate from "./emailMessage.jsx";
 
 const deletePurchaseById = async (req, res) => {
   try {
@@ -42,16 +40,15 @@ const createPurchase = async (req, res) => {
     },
   };
 
+  // ------- Adding purchase to the database -----
   try {
-    // console.log(req.body);
-    // Adding purchase to the database
     const result = await mongodb
       .getDb()
       .db("Veloster")
       .collection("carRental")
       .insertOne(purchaseInfo);
 
-    // Checking if the insertion in the db was successful
+    // --------- Checking if the insertion in the db was successful ---------
     if (result && result.insertedId) {
       // Sending an email to the owner confirming the purchase.
       const sendEmail = await sendEmailMessage(req, result.insertedId);
@@ -61,6 +58,7 @@ const createPurchase = async (req, res) => {
           error: sendEmail.error,
           message: "Re-check your email format",
         });
+        return;
       }
       res.status(201).json({
         message: `${result.insertedId} added to the database`,

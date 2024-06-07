@@ -1,5 +1,4 @@
 node_modules
 .env
 cypress
-# git rm  r --cached .env
-# git rm --cached cypress
+# git rm -r --cached cypress

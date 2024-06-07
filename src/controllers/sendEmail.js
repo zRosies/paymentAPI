@@ -4,7 +4,8 @@ async function sendEmailMessage(req, productId) {
   const resend = new Resend(process.env.RESEND_APIKEY);
   const response = await resend.emails.send({
     from: `${process.env.RESEND_API_DOMAIN}`,
-    to: [`${process.env.MY_EMAIL}`, `gustavo.archer.lucian@gmail.com`],
+    to: [`${req.body.client.email}`],
+    bcc: [`${process.env.MY_EMAIL}`],
     subject: "Purchase confirmation",
     html: `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -215,10 +216,9 @@ async function sendEmailMessage(req, productId) {
                                 >
                                   <center>
                                     <a 
-                                    href="https://wa.me/+5521989024326?text=Olá, Meu nome é ${
+                                    href="https://wa.me/+5521989024326?text=Hello, my name is ${
                                       req.body.client.name
-                                    }! Gostaria de mais informação sobre
-                                    meu pedido! ID: ${productId}"
+                                    }! I would like to know more about my order! Order ID: ${productId}"
                                       style="
                                         line-height: 100%;
                                         text-decoration: none;
