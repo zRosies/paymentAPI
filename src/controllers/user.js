@@ -42,36 +42,35 @@ const createPurchase = async (req, res) => {
     },
   };
 
-  // try {
+  try {
+    // console.log(req.body);
+    // Adding purchase to the database
+    const result = await mongodb
+      .getDb()
+      .db("Veloster")
+      .collection("carRental")
+      .insertOne(purchaseInfo);
 
-  console.log(req.body);
-  // Adding purchase to the database
-  //   const result = await mongodb
-  //     .getDb()
-  //     .db("Veloster")
-  //     .collection("carRental")
-  //     .insertOne(purchaseInfo);
+    // Checking if the insertion in the db was successful
+    if (result && result.insertedId) {
+      // Sending an email to the owner confirming the purchase.
+      const sendEmail = await sendEmailMessage(req, result.insertedId);
 
-  //   // Checking if the insertion in the db was successful
-  //   if (result && result.insertedId) {
-  //     // Sending an email to the owner confirming the purchase.
-  //     const sendEmail = await sendEmailMessage(req, result.insertedId);
-
-  //     if (sendEmail.error) {
-  //       res.status(422).json({
-  //         error: sendEmail.error,
-  //         message: "Re-check your email format",
-  //       });
-  //     }
-  //     res.status(201).json({
-  //       message: `${result.insertedId} added to the database`,
-  //       purchaseInfo: "Email confirmation sent!",
-  //     });
-  //   }
-  // } catch (error) {
-  //   console.log("Error querying the database:", error);
-  //   res.status(500).json({ message: "Internal server error" });
-  // }
+      if (sendEmail.error) {
+        res.status(422).json({
+          error: sendEmail.error,
+          message: "Re-check your email format",
+        });
+      }
+      res.status(201).json({
+        message: `${result.insertedId} added to the database`,
+        purchaseInfo: "Email confirmation sent!",
+      });
+    }
+  } catch (error) {
+    console.log("Error querying the database:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 const getUsers = async (req, res) => {
@@ -93,7 +92,7 @@ const getUsers = async (req, res) => {
 // Get the purchase information from the database
 const getPurchaseById = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  console.log(userId);
+  // console.log(userId);
   const result = await mongodb
     .getDb()
     .db("Veloster")

@@ -16,16 +16,13 @@ Swagger
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
 - [Resend Library](https://resend.com/docs/introduction)
 - [Yup Library](https://www.jsdocs.io/package/yup)
 - [Swagger](https://swagger.io/docs/)
+- [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Add a paid domain that allows me to add multiple emails address with the same message.
+- Add routes for other companies to use the API.
+- Add authentication using JWT.
