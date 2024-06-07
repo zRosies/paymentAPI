@@ -60,7 +60,7 @@
         }
       }
     },
-    "/api/purchase": {
+    "/api/purchases": {
       "get": {
         "description": "",
         "tags": ["Purchase"],
