@@ -60,7 +60,7 @@
         }
       }
     },
-    "/api/users": {
+    "/api/purchase": {
       "get": {
         "description": "",
         "tags": ["Purchase"],
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/api/users/{id}": {
+    "/api/purchase/{id}": {
       "get": {
         "description": "",
         "tags": ["Purchase"],
