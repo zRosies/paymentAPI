@@ -2,7 +2,7 @@
 
 This software will take care of car rental website purchases by providing API endpoints for the post, delete, update, and read HTTP requests. The main idea of the software is to listen when a purchase is made and once the payment is successful an email will be sent both to the owner and to the user who made the purchase
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://www.youtube.com/watch?v=D4KkVPslm8g)
 
 # Development Environment
 

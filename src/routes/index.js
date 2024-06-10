@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const user = require("./user.js");
+const purchase = require("./purchase");
 const swagger = require("./swagger.js");
 
-router.use("/api", user);
+router.use("/api", purchase);
 router.use("/swagger/doc", swagger);
 
 module.exports = router;

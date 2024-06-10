@@ -1,6 +1,5 @@
 const mongodb = require("../connection/db");
 const { ObjectId } = require("mongodb");
-const html = require("../../");
 const sendEmailMessage = require("./sendEmail");
 
 const deletePurchaseById = async (req, res) => {
@@ -74,7 +73,7 @@ const createPurchase = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getPurchases = async (req, res) => {
   const result = await mongodb
     .getDb()
     .db("Veloster")
@@ -117,7 +116,7 @@ const getPurchaseById = async (req, res) => {
 
 module.exports = {
   createPurchase,
-  getUsers,
+  getPurchases,
   getPurchaseById,
   deletePurchaseById,
 };
